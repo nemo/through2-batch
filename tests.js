@@ -101,6 +101,7 @@ describe("through2-batch", function() {
     });
 
     function shouldHaveBatchedWithSize(batchSize, transform) {
+        var totalProcessed = 0;
         var totalBatches = Math.ceil(objs.length / batchSize);
         expect(transform.callCount).to.be.equal(totalBatches);
 
@@ -111,6 +112,10 @@ describe("through2-batch", function() {
                 var index = objs.indexOf(item);
                 expect(index).to.not.equal(-1);
             });
+
+            totalProcessed += batch.length;
         });
+
+        expect(totalProcessed).to.equal(objs.length);
     }
 });
