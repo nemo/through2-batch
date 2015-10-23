@@ -1,5 +1,8 @@
+[![Build Status](https://circleci.com/gh/nemo/through2-batch.svg?style=svg)](https://circleci.com/gh/nemo/through2-batch)
+
 through2-batch
 ===================
+
 A stream that transforms chunks to batches form the stream.
 [![NPM](https://nodei.co/npm/through2-batch.png?downloads&downloadRank)](https://nodei.co/npm/through2-batch/)
 
@@ -13,7 +16,6 @@ Non-`objectMode` streams are supported for completeness.
 
 Written by Nima Gardideh ([halfmoon.ws](http://halfmoon.ws) and used in production by [Taplytics](http://taplytics.com).
 
-[![Build Status](https://circleci.com/gh/nemo/through2-batch.svg?style=svg)](https://circleci.com/gh/nemo/through2-batch)
 
 
 Install
