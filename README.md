@@ -31,8 +31,6 @@ Process rows from a CSV in batches.
 ```javascript
 var through2Batch = require('through2-batch');
 
-var all = [];
-
 fs.createReadStream('data.csv')
   .pipe(csv2())
   .pipe(through2Batch.obj(
@@ -43,10 +41,7 @@ fs.createReadStream('data.csv')
       someThingAsync(batch, function (newChunk) {
         self.push(newChunk);
       });
-  }))
-  .on('end', function () {
-    doSomethingSpecial(all)
-  })
+  }));
 ```
 
 
