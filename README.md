@@ -14,7 +14,7 @@ same API with the addition of a `batchSize` option.
 
 Non-`objectMode` streams are supported for completeness.
 
-Written by Nima Gardideh ([halfmoon.ws](http://halfmoon.ws) and used in production by [Taplytics](http://taplytics.com).
+Written by Nima Gardideh ([halfmoon.ws](http://halfmoon.ws)) and used in production by [Taplytics](http://taplytics.com).
 
 
 
