@@ -1,0 +1,45 @@
+{
+  "name": "through2-batch",
+  "version": "1.0.0",
+  "description": "A stream that transforms chunks to batches form the stream",
+  "main": "through2-batch.js",
+  "files": [
+    "through2-batch.js"
+  ],
+  "scripts": {
+    "test": "mocha tests.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nemo/through2-batch"
+  },
+  "keywords": [
+    "through2",
+    "streams",
+    "streams2",
+    "through",
+    "transform",
+    "batch",
+    "chunk",
+    "batches"
+  ],
+  "author": {
+    "name": "Nima Gardideh",
+    "email": "nima@halfmoon.ws",
+    "url": "http://halfmoon.ws/"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nemo/through2-batch/issues"
+  },
+  "devDependencies": {
+    "chai": "^3.4.0",
+    "lodash": "^3.10.1",
+    "mocha": "^2.2.1",
+    "sinon": "^1.17.2",
+    "stream-array": "^1.1.1"
+  },
+  "dependencies": {
+    "through2": "^2.0.0"
+  }
+}
