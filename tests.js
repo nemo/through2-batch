@@ -107,6 +107,10 @@ describe("through2-batch", function() {
         _.each(_.range(0, totalBatches), function(batchIndex) {
             var batch = transform.getCall(batchIndex).args[0];
             expect(batch.length).to.be.most(batchSize);
+            _.each(batch, function(item) {
+                var index = objs.indexOf(item);
+                expect(index).to.not.equal(-1);
+            });
         });
     }
 });
