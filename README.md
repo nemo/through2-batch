@@ -51,4 +51,4 @@ Contributing
 ------------
 
 Fixed or improved stuff? Great! Send me a pull request [through GitHub](http://github.com/nemo/through2-batch)
-or get in touch on Twitter [@ngardideh][@ngardideh].
+or get in touch on Twitter [@ngardideh](@ngardideh).
