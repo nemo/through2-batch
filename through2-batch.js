@@ -29,9 +29,9 @@ module.exports = function batchThrough(options, transform, flush) {
       if (batched.length < batchSize) {
           callback();
       } else {
-          transform.call(this, batched, enc, function (err) {
+          transform.call(this, batched, enc, function (err, data) {
               batched = [];
-              callback(err);
+              callback(err, data);
           });
       }
   }
