@@ -134,6 +134,20 @@ describe("through2-batch", function() {
         });
 
     });
+    describe("optional tranform fn", function() {
+        it("doesn't need tranform fn and can just pipe batch to next stream", function(done) {
+            var objectsProcessed = 0
+            stream.pipe(through2Batch.obj())
+                .pipe(through2.obj(function(batch, enc, next){
+                    objectsProcessed += batch.length
+                    next();
+                }))
+                .on('finish', function(){
+                  expect(objectsProcessed).to.be.equal(1000);
+                  done()
+                });
+        });
+    });
 
     function shouldHaveBatchedWithSize(batchSize, transform) {
         var totalProcessed = 0;
