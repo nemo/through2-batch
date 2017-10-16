@@ -46,6 +46,16 @@ fs.createReadStream('data.csv')
   }));
 ```
 
+Don't specify a transform fn, and let the batches be processed by another stream
+```javascript
+var through2Batch = require('through2-batch');
+
+fs.createReadStream('data.csv')
+  .pipe(csv2())
+  .pipe(through2Batch.obj())
+  .pipe(getSomeOtherStreamProcessingBatches());
+```
+
 
 Contributing
 ------------

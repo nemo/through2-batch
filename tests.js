@@ -1,4 +1,5 @@
 var through2Batch = require('./through2-batch');
+var through2 = require('through2');
 var _ = require('lodash');
 var streamify = require('stream-array');
 var sinon = require('sinon');
@@ -100,6 +101,54 @@ describe("through2-batch", function() {
 
     });
 
+    describe("through2 interface", function() {
+        testTemplate = function(through2BatchTransform, done) {
+            objectsProcessed = 0
+
+            stream.pipe(through2Batch.obj(through2BatchTransform))
+                .pipe(through2.obj(lastTransformSpy = sinon.spy(function(batch, enc, next){
+                        objectsProcessed += batch.length
+                        next()
+                })))
+                .on('finish', function() {
+                    expect(lastTransformSpy.callCount).to.be.above(0);
+                    expect(objectsProcessed).to.be.equal(1000);
+                    done();
+                });
+        };
+
+        it("passes values to next stream using this.push()", function(done) {
+            transform = function(batch, enc, next){
+                this.push(batch);
+                next();
+            };
+            testTemplate(transform, done);
+        });
+
+        it("passes values to next stream using .next(null, values)", function(done) {
+            transform = function(batch, enc, next){
+                next(null, batch);
+            };
+            testTemplate(transform, done);
+
+        });
+
+    });
+    describe("optional tranform fn", function() {
+        it("doesn't need tranform fn and can just pipe batch to next stream", function(done) {
+            var objectsProcessed = 0
+            stream.pipe(through2Batch.obj())
+                .pipe(through2.obj(function(batch, enc, next){
+                    objectsProcessed += batch.length
+                    next();
+                }))
+                .on('finish', function(){
+                  expect(objectsProcessed).to.be.equal(1000);
+                  done()
+                });
+        });
+    });
+
     function shouldHaveBatchedWithSize(batchSize, transform) {
         var totalProcessed = 0;
         var totalBatches = Math.ceil(objs.length / batchSize);
@@ -119,3 +168,5 @@ describe("through2-batch", function() {
         expect(totalProcessed).to.equal(objs.length);
     }
 });
+
+

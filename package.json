@@ -1,6 +1,6 @@
 {
   "name": "through2-batch",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "A stream that transforms chunks to batches form the stream",
   "main": "through2-batch.js",
   "files": [

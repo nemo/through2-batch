@@ -6,7 +6,7 @@ module.exports = function batchThrough(options, transform, flush) {
   var batchSize;
   var lastEnc = null;
 
-  if (typeof options === 'function') {
+  if (typeof options !== 'object') {
       flush     = transform;
       transform = options;
       options   = {};
@@ -23,16 +23,18 @@ module.exports = function batchThrough(options, transform, flush) {
   function _transform(message, enc, callback) {
       var self = this;
       lastEnc = enc;
-      var callbackCalled = false;
       batched.push(message);
 
       if (batched.length < batchSize) {
           callback();
-      } else {
-          transform.call(this, batched, enc, function (err) {
+      } else if (transform) {
+          transform.call(this, batched, enc, function (err, data) {
               batched = [];
-              callback(err);
+              callback(err, data);
           });
+      } else {
+        callback(null, batched);
+        batched = [];
       }
   }
 
@@ -54,7 +56,7 @@ module.exports = function batchThrough(options, transform, flush) {
 };
 
 module.exports.obj = function (options, transform, flush) {
-  if (typeof options === 'function') {
+  if (typeof options !== 'object') {
     flush     = transform;
     transform = options;
     options   = {};
