@@ -42,11 +42,16 @@ module.exports = function batchThrough(options, transform, flush) {
       var self = this;
 
       if (batched.length > 0) {
-          transform.call(this, batched, lastEnc, function (err) {
+          if (transform) {
+              transform.call(this, batched, lastEnc, function (err) {
+                  batched = [];
+                  if (err) callback(err);
+                  else flush.call(self, callback);
+              });
+          } else {
               batched = [];
-              if (err) callback(err);
-              else flush.call(self, callback);
-          });
+              flush.call(this,callback);
+          }
       } else {
           flush.call(this,callback);
       }
