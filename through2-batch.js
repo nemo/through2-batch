@@ -49,6 +49,7 @@ module.exports = function batchThrough(options, transform, flush) {
                   else flush.call(self, callback);
               });
           } else {
+              callback(null, batched);
               batched = [];
               flush.call(this,callback);
           }
